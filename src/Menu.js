@@ -4,6 +4,7 @@ import { useAuth } from "./auth";
 
 function Menu() {
     const auth = useAuth();
+    
 
     return (
         <nav>
