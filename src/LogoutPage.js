@@ -3,6 +3,7 @@ import { useAuth } from "./auth";
 
 function LogoutPage () {
     const auth = useAuth();
+    // const auth = useContext(AuthContext)
 
     const logout = (e) => {
         e.preventDefault();
