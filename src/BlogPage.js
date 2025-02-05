@@ -1,8 +1,16 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from "./auth";
 
 function BlogPage({ blogdata }) {
+    const auth = useAuth();
+    const navigate = useNavigate();
 
+    const canAdd = auth.user?.isAdmin || auth.user?.isEditor;
+
+    const handleAdd = () => {
+        navigate('/add-post')
+    }
     return (
         <>
             <h1>Blog</h1>
@@ -12,6 +20,10 @@ function BlogPage({ blogdata }) {
                     <BlogLink key={post.slug} post={post} />
                 ))}
             </ul>
+            {canAdd && (
+                <button
+                onClick={() => handleAdd()}>Agregar post</button>
+            )}
         </>
     );
 }

@@ -7,14 +7,14 @@ function BlogPost({ blogdata, onDelete, onEdit }) {
     const [showInput, setShowInput] = React.useState(false);
 
     const navigate = useNavigate();
-    const { slug } =useParams();
+    const { slug } = useParams();
 
     const auth = useAuth();
     const blogpost = blogdata.find(post => post.slug === slug)
 
     const canDelete = auth.user?.isAdmin || blogpost.author === auth.user?.username;
     const canEdit = auth.user?.isAdmin || auth.user?.isEditor ||blogpost.author === auth.user?.username;
-    const canAdd = auth.user?.isAdmin || auth.user?.isEditor;
+    
 
     const editWindow = () => {
         setShowInput(true);
@@ -44,10 +44,6 @@ function BlogPost({ blogdata, onDelete, onEdit }) {
         // navigate(-1);
     }
 
-    const handleAdd = () => {
-        navigate('/add-post')
-    }
-
     return (
         <>
             <h1>{blogpost.title}</h1>
@@ -74,10 +70,6 @@ function BlogPost({ blogdata, onDelete, onEdit }) {
                     <button type="submit">Actualizar</button>
                 </div>
                  </form>
-            )}
-             {canAdd && (
-                <button
-                onClick={() => handleAdd()}>Agregar post</button>
             )}
             
         </>

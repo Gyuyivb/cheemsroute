@@ -24,7 +24,7 @@ const data = [
    
    function useBlogData () {
     const [ blogdata, setBlogData] = React.useState(data);
-    const [ addBlog, setAddBLog] = React.useState({ title: '', content: ''});
+    const [ addBlog, setAddBlog] = React.useState({ title: '', content: ''});
 
     const handleEdit = (slug, value) => {
         const newBlogs = [...blogdata];
@@ -49,7 +49,7 @@ const data = [
         //     content: parseInt(addBlog.edad), // Convierte la edad a número
         //   };
         //   setBlogData([...blogdata, newObject]); // Agrega el nuevo objeto al final de la lista
-        //   setAddBLog({ title: '', content: '' }); // Limpia los campos del formulario
+        //   setAddBlog({ title: '', content: '' }); // Limpia los campos del formulario
         // } else {
         //   alert('Por favor, completa ambos campos.');
         // }
@@ -59,7 +59,8 @@ const data = [
         blogdata,
         setBlogData,
         handleEdit,
-        handleDelete
+        handleDelete,
+        handleAdd,
     }
 }
 

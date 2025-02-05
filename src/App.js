@@ -15,6 +15,7 @@ function App() {
     blogdata,
     handleDelete,
     handleEdit,
+    handleAdd,
   } = useBlogData();
 
   return (
@@ -43,7 +44,8 @@ function App() {
             }/>
             <Route path="/add-post" element={
               <AuthAdd>
-                <AddPost />
+                <AddPost 
+                onAdd={handleAdd}/>
               </AuthAdd>}/>
 
           <Route path="*" element={<p>NOT FOUND</p>}/>
