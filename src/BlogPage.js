@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import { blogdata } from "./blogdata.js"
 
-function BlogPage() {
+function BlogPage({ blogdata }) {
+
     return (
         <>
             <h1>Blog</h1>
