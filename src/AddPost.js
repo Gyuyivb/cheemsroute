@@ -21,7 +21,6 @@ function AddPost ({ onAdd }) {
     const getSlug = (event) => {
         let newSlug = event.target.value;
         newSlug = newSlug.toLowerCase().replace(/[\s,\.]+/g, '-');
-        console.log('el slug: ', newSlug)
            setNewData({
                 ...newData,
                 slug: newSlug,})
@@ -36,7 +35,9 @@ function AddPost ({ onAdd }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log('lo datoo: ', newData)
+        onAdd(newData);
+        navigate('/blog');
+
     }
     
     return(

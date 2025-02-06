@@ -24,7 +24,6 @@ const data = [
    
    function useBlogData () {
     const [ blogdata, setBlogData] = React.useState(data);
-    const [ addBlog, setAddBlog] = React.useState({ title: '', content: ''});
 
     const handleEdit = (slug, value) => {
         const newBlogs = [...blogdata];
@@ -40,19 +39,18 @@ const data = [
         setBlogData(newBlogs);
     };
 
-    const handleAdd = () => {
+    const handleAdd = (newData) => {
         // Solo agrega el objeto si los campos no están vacíos
-        // if (addBlog.title && addBlog.content) {
-        //   const newObject = {
-        //     slug: blogdata.length + 1, // Genera un nuevo ID (puedes usar otro sistema de IDs si prefieres)
-        //     title: addBlog.title,
-        //     content: parseInt(addBlog.edad), // Convierte la edad a número
-        //   };
-        //   setBlogData([...blogdata, newObject]); // Agrega el nuevo objeto al final de la lista
-        //   setAddBlog({ title: '', content: '' }); // Limpia los campos del formulario
-        // } else {
-        //   alert('Por favor, completa ambos campos.');
-        // }
+          const newObject = {
+            title: newData.title,
+            slug:  newData.slug,
+            content: newData.content,
+            author:  newData.author,
+           };
+          setBlogData([...blogdata, newObject]); // Agrega el nuevo objeto al final de la lista
+          console.log(blogdata);
+          //setAddBlog({ title: '', content: '' }); // Limpia los campos del formulario
+       
       };
 
     return {
