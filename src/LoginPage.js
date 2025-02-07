@@ -1,15 +1,24 @@
 import React from "react";
 import { useAuth } from "./auth";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function LoginPage () {
     const auth = useAuth();
     const [username, setUsername] = React.useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from || "/";
 
     const login = (e) => {
         e.preventDefault();
         auth.login({ username });
-        console.log(username);
     }
+    React.useEffect(() => {
+
+        if(auth.user) {
+            navigate(from, { replace: true });
+          }
+    }, [])
     return (
         <>
             <h1>LOGIN</h1>
