@@ -16,7 +16,11 @@ function AuthProvider ({ children }) {
         const isAdmin = adminList.find(admin => admin === username)
         const isEditor = editList.find(editor => editor === username)
         setUser({ username, isAdmin, isEditor });
-        navigate(from, { replace: true });
+        if (!auth.user?.isAdmin && !auth.user?.isEditor){
+            navigate('/profile')
+        }else {
+            navigate(from, { replace: true });
+        }
     }
     const logout = () => {
         setUser(null);
@@ -39,8 +43,10 @@ function AuthAdd (props) {
     const auth = useAuth();
     const location = useLocation();
 
-    if (!auth.user?.isAdmin && !auth.user?.isEditor) {
+    if (!auth.user && !auth.user?.isAdmin && !auth.user?.isEditor) {
         return <Navigate to = "/login" state={{ from: location }} replace />
+    }else {
+        return <Navigate to = "/blog" />
     }
     return props.children
 }

@@ -13,12 +13,12 @@ function LoginPage () {
         e.preventDefault();
         auth.login({ username });
     }
-    React.useEffect(() => {
 
-        if(auth.user) {
-            navigate(from, { replace: true });
-          }
-    }, [])
+    if(auth.user) {
+        navigate(from, { replace: true });
+      }
+
+
     return (
         <>
             <h1>LOGIN</h1>

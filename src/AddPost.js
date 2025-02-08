@@ -8,9 +8,6 @@ function AddPost ({ onAdd }) {
     const [showInput, setShowInput] = React.useState(false);
 
     const [newData, setNewData] = React.useState({ title: '', slug: '', content: '', author: auth.user?.username });
-    // setNewData({
-    //     author: auth.user?.username,
-    // })
     
     const onCancel = () => {
         setShowInput(false);
