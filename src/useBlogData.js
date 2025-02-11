@@ -5,7 +5,7 @@ const data = [
         title:'Sobre Cheems',
         slug: 'sobre-cheems',
         content: 'Cheems es lindo y tiene amsieda.',
-        author: 'Gyuyi',
+        author: 'gyuyi',
     },
     {
         title:'La amsieda de cheems',
@@ -17,7 +17,19 @@ const data = [
         title:'La anvorguesa',
         slug: 'la-anvorguesa',
         content: 'Es deliciosa, pero la cajera asusta a cheems.',
-        author: 'juan',
+        author: 'cheemsiano',
+    },
+    {
+        title:'Los cheems son hermosos',
+        slug: 'los-cheems-son-hermosos',
+        content: 'Los shibas son perros hermososDejen de sacar isekais con harem porfavor.',
+        author: 'gyuyi',
+    },
+    {
+        title:'YA ESTOY CANSADA',
+        slug: 'ya-estoy-cansada',
+        content: 'Hola.',
+        author: 'gyuyi',
     }
 ]
 

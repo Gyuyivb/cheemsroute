@@ -13,31 +13,29 @@ function BlogPost({ blogdata, onDelete, onEdit }) {
     const blogpost = blogdata.find(post => post.slug === slug)
 
     const canDelete = auth.user?.isAdmin || blogpost.author === auth.user?.username;
-    const canEdit = auth.user?.isAdmin || auth.user?.isEditor ||blogpost.author === auth.user?.username;
+    const canEdit = auth.user?.isAdmin || auth.user?.isEditor || blogpost.author === auth.user?.username;
     
-
+    //Edit/delete post
     const editWindow = () => {
         setShowInput(true);
-        console.log(showInput)
-    }
-    const onSubmit = (event) => {
-        event.preventDefault();
-        onEdit(blogpost.slug, content)
-        setShowInput(false);
     }
     const onCancel = () => {
         setShowInput(false);
-        console.log(showInput)
     }
     const editPost = (event) => {
         setContent(event.target.value)
-        //console.log(content)
     }
     const handleDelete = (blogslug) => {
         onDelete(blogslug);
         navigate('/blog');
     }
 
+    //Actualizando
+    const onSubmit = (event) => {
+        event.preventDefault();
+        onEdit(blogpost.slug, content)
+        setShowInput(false);
+    }
 
     const returnToBlog = () => {
         navigate('/blog'); 
@@ -48,7 +46,7 @@ function BlogPost({ blogdata, onDelete, onEdit }) {
         <>
             <h1>{blogpost.title}</h1>
             <button onClick={returnToBlog}>Volver</button>
-            <p>{blogpost.author}</p>
+            <p>Autor: {blogpost.author}</p>
             <p>{blogpost.content}</p>
 
             {canDelete && (

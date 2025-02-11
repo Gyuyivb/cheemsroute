@@ -9,6 +9,7 @@ import { LoginPage } from "./LoginPage";
 import { LogoutPage } from "./LogoutPage";
 import { useBlogData } from "./useBlogData";
 import { AddPost } from "./AddPost";
+import { UserProfile } from "./UserProfile";
 
 function App() {
   const {
@@ -39,9 +40,11 @@ function App() {
             path="/profile" 
             element={
               <AuthRoute>
-              <ProfilePage />
+              <ProfilePage 
+              blogdata={blogdata}/>
             </AuthRoute>
             }/>
+            <Route path="/profile/:username" element={<UserProfile blogdata={blogdata} />} />
             <Route path="/add-post" element={
               <AuthAdd>
                 <AddPost 
