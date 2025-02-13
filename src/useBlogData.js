@@ -40,7 +40,7 @@ const data = [
     const handleEdit = (slug, value) => {
         const newBlogs = [...blogdata];
         const blogIndex = newBlogs.findIndex(
-            (blog) => blog.slug == slug
+            (blog) => blog.slug === slug
         );
         newBlogs[blogIndex].content = value;
         setBlogData(newBlogs);
@@ -59,9 +59,7 @@ const data = [
             content: newData.content,
             author:  newData.author,
            };
-          setBlogData([...blogdata, newObject]); // Agrega el nuevo objeto al final de la lista
-          console.log(blogdata);
-          //setAddBlog({ title: '', content: '' }); // Limpia los campos del formulario
+          setBlogData([...blogdata, newObject]); // Add the new object to the end of the list
        
       };
 

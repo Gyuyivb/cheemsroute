@@ -1,13 +1,15 @@
 import React from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { profiles } from "./profiledata";
+import { useProfileData } from "./useProfileData";
 
-const adminList = profiles.filter(user => user.role === 'Admin');
-const editList = profiles.filter(user => user.role === 'Editor');
 
 const AuthContext = React.createContext();
 
 function AuthProvider ({ children }) {
+    const { profileData: profiles } =useProfileData();
+    const adminList = profiles.filter(user => user.role === 'Admin');
+    const editList = profiles.filter(user => user.role === 'Editor');
+
     const navigate = useNavigate();
     const [user, setUser] = React.useState(null);
     const location = useLocation();
@@ -19,11 +21,8 @@ function AuthProvider ({ children }) {
         console.log('admin:', isAdmin)
     
         setUser({ username, isAdmin, isEditor });
-         navigate(from, { replace: true });
-        // if (!auth.user?.isAdmin && !auth.user?.isEditor){
-        //     navigate('/profile')
-        // }else {
-        // }
+        navigate(from, { replace: true });
+        
     }
     const logout = () => {
         setUser(null);

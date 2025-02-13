@@ -11,7 +11,6 @@ function AddPost ({ onAdd }) {
     
     const onCancel = () => {
         setShowInput(false);
-        console.log(showInput)
         navigate('/blog');
     }
 

@@ -1,16 +1,45 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "./auth";
-import { profiles } from "./profiledata";
+import { useProfileData } from "./useProfileData";
 
 function UserProfile ({ blogdata }) {
-    const auth =useAuth();
+    const [content, setContent] = React.useState('');
+    const [showInput, setShowInput] = React.useState(false);
+    //Importing profile data
+    const { 
+        profileData: profiles,
+        handleEdit: onEdit,
+     } = useProfileData();
+    
+    const auth = useAuth();
     const { username } = useParams();
+    const navigate = useNavigate();
 
     const userProfile = profiles.find(profile => profile.username === username)
     //console.log('el slug: ', userProfile)
 
     const filteredPost = blogdata.filter(post => post.author === userProfile?.username)
+    const canEdit = auth.user?.isAdmin || userProfile.username === auth.user?.username;
+
+    //Edit info
+    const editWindow = () => {
+        setShowInput(true);
+    }
+    const onCancel = () => {
+        setShowInput(false);
+    }
+    const editPost = (event) => {
+        setContent(event.target.value)
+        console.log('fdsfdsf: ', content)
+    }
+    const onSubmit = (event) => {
+        event.preventDefault();
+        console.log('contenido', userProfile.info)
+        onEdit(userProfile.username, content)
+        setShowInput(false);
+    }
+
 
     const blogsPosted = () => {
         if (filteredPost.length) {
@@ -21,24 +50,43 @@ function UserProfile ({ blogdata }) {
             )
         } else {
             return (
-                <p>No ha publicado nada aun</p>
+                <p>No posts yet</p>
             )
         }
     }
-    console.log('el user:', username)
+    // if (username === auth.user.username) {
+        
+    //     navigate('/profile')
+    // }
+    //console.log('el user:', username, auth.user.username)
 
     if (!userProfile) {
         return(
             <>
-            <h1>Parece que no hay nadie</h1>
+            <h1>Looks like this is empty</h1>
             </>
         )
     }else {
         return (
             <>
-                <h2>{userProfile.username}</h2>
+                <h2>{userProfile.username}'s profile</h2>
                 <p>{userProfile.role}</p>
-                <p>Blogs publicados:</p>
+                <p>{userProfile.info}</p>
+                {canEdit && (
+                    <button onClick={() => editWindow()}>Edit info</button>     
+                )}
+                {showInput && (
+                    <form onSubmit={onSubmit}>
+                    <textarea 
+                    value={content}
+                    onChange={editPost}/>
+                    <div>
+                    <button type="button"
+                        onClick={onCancel} >Cancel</button>
+                    <button type="submit">Update</button>
+                </div>
+                    </form>)}
+                <p>Blogs published:</p>
                 <ul>
                     {blogsPosted()}
                 </ul>
