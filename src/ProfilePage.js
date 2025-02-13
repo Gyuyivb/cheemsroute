@@ -12,11 +12,7 @@ function ProfilePage({ blogdata }) {
     const { 
         profileData: profiles,
         handleEdit: onEdit,
-        handleAdd: newUser,
     } = useProfileData();
-    
-    //New state for new user
-    const [newData, setNewData] = React.useState({ username: auth.user?.username, role: '', info: ''});
 
     const userProfile = profiles.find(profile => profile.username === auth.user.username)
     const filteredPost = blogdata.filter(post => post.author === auth.user.username)
@@ -48,15 +44,7 @@ function ProfilePage({ blogdata }) {
     }
     const onSubmit = (event) => {
         event.preventDefault();
-        if (!auth.user.username) {
-            setNewData((prev) => ({
-                ...prev,
-                info: content,
-            }))
-            newUser(newData);
-        }else {
-            onEdit(userProfile.username, content)
-        }
+        onEdit(userProfile.username, content)
         setShowInput(false);
         
     }

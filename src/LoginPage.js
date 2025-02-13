@@ -8,15 +8,17 @@ function LoginPage () {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from || "/";
-
+  
+    
     const login = (e) => {
         e.preventDefault();
         auth.login({ username });
     }
 
+
     if(auth.user) {
         navigate(from, { replace: true });
-      }
+    }
 
 
     return (
